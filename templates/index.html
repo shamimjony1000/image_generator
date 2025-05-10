@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Generator</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='image/machine-learning.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='image/machine-learning.png') }}" alt="Logo" class="logo">
+                <div class="title-container">
+                    <h1>AI Image Generator</h1>
+                    <p>Create stunning images with AI using simple text prompts</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="form-container">
+            <form id="image-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="prompt">Describe your image:</label>
+                    <textarea id="prompt" name="prompt" placeholder="A serene mountain lake at sunset" required></textarea>
+                    <div class="example-prompts">
+                        <p class="help-text">Or choose an example prompt:</p>
+                        <div class="prompt-buttons">
+                            <button type="button" class="prompt-btn" data-prompt="A majestic, proud wet rooster with shiny, iridescent feathers, standing heroically on the edge of a weathered, terra cotta rooftop in the midst of a torrential downpour, its beak open wide as it lets out a thunderous crow at exactly 6 AM, raindrops falling like diamonds around it, accompanied by misty wisps of fog, set against a dramatic, cinematic village background with steeply pitched roofs, crumbling chimneys, and ancient, gnarled trees, all rendered in exquisite, hyper-realistic 4K detail, with water droplets glistening on every surface, as the morning light struggles to pierce through the thick, gray clouds.">Majestic Rooster</button>
+                            <button type="button" class="prompt-btn" data-prompt="A serene and enigmatic portrait of a woman, her face a masterpiece of subtle emotions, with high cheekbones, a small nose, and full lips that curve into a gentle, knowing smile, her skin a warm, golden brown, her dark hair styled in loose, flowing waves, her eyes, an deep, mysterious brown, gazing directly at the viewer, set against a soft, creamy background, with the focal point being her face, illuminated by a soft, natural light, with minimal shadows, and a shallow depth of field, showcasing the subject's introspective beauty, evoking a sense of calm contemplation.">Beautiful Siren woman</button>
+                            <button type="button" class="prompt-btn" data-prompt="A defiant 25-year-old woman, clad in oil-stained leather and ripped jeans, stands amidst a chaotic garage, surrounded by half-dismantled motorcycles and choppers.  Tools litter the workbench; a vibrant Futura 2000-style 310 graffiti explodes on the back wall, casting a neon glow.  Her two faded tattoo sleeves hint at a rebellious past, the air thick with grease, gasoline, and defiance.The scene is awash in gritty realism, a blend of urban grit and mechanical precision, capturing a moment of intense focus and quiet rebellion.">A defiant 25-year-old woman</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reference_image">Upload a reference image (optional):</label>
+                    <div class="file-input-container">
+                        <input type="file" id="reference_image" name="reference_image" accept="image/*" class="file-input">
+                        <div class="file-input-preview" id="image-preview"></div>
+                    </div>
+                    <p class="help-text">Upload an image to generate a similar one</p>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="model">Model:</label>
+                        <select id="model" name="model">
+                            <option value="DALL-E 3" selected>DALL-E 3</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="model_style">Style:</label>
+                        <select id="model_style" name="model_style">
+                            <option value="default" selected>Default</option>
+                            <option value="vivid">Vivid</option>
+                            <option value="natural">Natural</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="model_aspect_ratio">Aspect Ratio:</label>
+                        <select id="model_aspect_ratio" name="model_aspect_ratio">
+                            <option value="9:16">Portrait (9:16)</option>
+                            <option value="1:1">Square (1:1)</option>
+                            <option value="16:9">Landscape (16:9)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" id="generate-btn">Generate Image</button>
+            </form>
+        </div>
+
+        <div class="result-container">
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Generating your image...</p>
+            </div>
+            <div id="result" class="hidden">
+                <h2>Your Generated Image</h2>
+                <div id="image-container"></div>
+                <div class="image-info">
+                    <p id="prompt-used"></p>
+                </div>
+            </div>
+            <div id="error" class="hidden">
+                <h2>Error</h2>
+                <p id="error-message"></p>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p>&copy; 2025 Developed by <span class="developer-name">Shamim MD Jony</span></p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
