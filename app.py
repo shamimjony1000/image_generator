@@ -101,18 +101,16 @@ def generate_image():
                 "prompt": prompt
             }
             
-            # Return the mock response for testing
-            print("Using mock response for testing")
-            return jsonify(mock_response)
+            # Mock response for testing - commented out to use real API
+            # print("Using mock response for testing")
+            # return jsonify(mock_response)
             
-            # Uncomment the below code when the API is working correctly
-            '''
+            # Real API call
             response = requests.post(API_URL, json=payload, headers=headers)
             
             # Debug: Print response details
             print(f"API Response Status: {response.status_code}")
             print(f"API Response Headers: {response.headers}")
-            '''
         except Exception as request_error:
             print(f"Error making API request: {str(request_error)}")
             import traceback
@@ -125,10 +123,8 @@ def generate_image():
                 "prompt": prompt
             })
         
-        # The code below is commented out since we're using a mock response for testing
-        # Once the API connection is fixed, you can uncomment this section and comment out the mock response above
+        # Process the API response
         
-        '''
         # Try to get the response text, but handle potential errors
         try:
             response_text = response.text
@@ -205,7 +201,6 @@ def generate_image():
                 "details": str(json_error),
                 "raw_response": response_text
             }), 500
-        '''
             
     except Exception as e:
         print(f"Exception in generate_image: {str(e)}")
@@ -214,4 +209,4 @@ def generate_image():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8080, host='127.0.0.1')
