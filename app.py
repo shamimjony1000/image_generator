@@ -34,7 +34,7 @@ except ImportError as e:
 app = Flask(__name__)
 
 # API configuration
-API_KEY = "CkBReIqmUkX88osNL7T5ntzdd8uIsgxPMgRqjIw3WU3pawoZ5M4L91kChMG5gjtw"
+API_KEY = ""
 API_URL = "https://api-lr.agent.ai/v1/action/generate_image"
 
 @app.route('/')
