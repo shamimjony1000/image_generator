@@ -9,6 +9,9 @@ A Flask-based web application that generates images using AI through the agent.a
 - Support for different aspect ratios and styles
 - Responsive design that works on desktop and mobile
 
+## Live Demo
+https://image.parviit.com
+
 ## Requirements
 
 - Python 3.7+
